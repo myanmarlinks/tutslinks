@@ -1,4 +1,4 @@
-tutslinks
+TutsLinks (Course Module)
 =========
 
-Myanmar Links Learning Center
+This module is only dedicated for TutsLinks website, developed by [Myanmar Links](http://www.myanmarlinks.net).
