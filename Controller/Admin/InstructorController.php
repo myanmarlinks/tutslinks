@@ -48,13 +48,12 @@ class InstructorController extends \AdminController
 		$instructorUser = array();
 
 		foreach ($users as $user) {
-			if (\Sentry::getUserProvider()->findById($user->id)->hasAccess('Admin')) {
+			if (\Sentry::getUserProvider()->findById($user->id)->hasAccess('admin')) {
 				$instructorUser[] = $user;
 			}
 		}
 
 		$ins = e2s($instructorUser, 'id', 'email');
-
 
 		$this->template->title('Add New Instructor')
 					->breadcrumb('Add New Instructor')
