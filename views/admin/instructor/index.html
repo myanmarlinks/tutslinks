@@ -1,0 +1,31 @@
+{{ if(count($instructors) > 0) }}
+<table class="stripe">
+	<thead>
+		<tr>
+			<!-- <th>ID</th> -->
+			<th></th>
+			<th>Instructor Name</th>
+			<th>Mail Address</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	{{ loop($instructors as $i) }}
+			<tr>
+				<!-- <td>{{ $u->id }}</td> -->
+				<td width=32>{{ gravatar($i->email, 42, $i->name) }}</td>
+				<td>{{ $i->name }}</td>
+				<td>{{ $i->email }}</td>
+				<td>
+					<a href="{{ \Uri::create("$adminUrl/course/instructor/edit/") }}{{ $i->id }}" class="ico-button button-green tipsy-tip" original-title="Edit"><i class="icon-edit icon-white"></i></a>
+					<a href="{{ \Uri::create("$adminUrl/course/instructor/remove/") }}{{ $i->id }}" class="ico-button button-red tipsy-tip confirm_delete" original-title="Remove"><i class="icon-cross2 icon-white"></i></a>
+				</td>
+			</tr>
+	{{ endloop }}
+	</tbody>
+</table>
+{{ else }}
+	<div id="no-index-data">
+		No Instructor Found!
+	</div>
+{{ endif }}

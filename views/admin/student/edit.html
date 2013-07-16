@@ -1,0 +1,33 @@
+<div id="instructor-container">
+	
+	{{ Form::start("$adminUrl/course/student/edit/$student->id", 'student_add_form', false, array('class' => 'form')) }}
+
+	<div class="form-block">
+		<label for="">{{ Form::label('Edit Student name', 'student') }}<span class="required"></span></label>
+		
+		<div class="form-right-block">
+			{{ Form::input('name', $student->name, 'text', array('id' => 'instructor') ) }}
+		</div> <!-- end of form-right-block -->
+	</div> <!-- end of form block -->
+
+	<div class="form-block">
+		<label for="">{{ Form::label('Ph Number', 'phno') }}<span class="required"></span></label>
+		
+		<div class="form-right-block">
+			{{ Form::input('phno', $student->phno, 'text', array('id' => 'phNo')) }}
+		</div> <!-- end of form-right-block -->
+	</div> <!-- end of form block -->
+
+	<div class="form-block">
+    	<label for="">{{ Form::label('Address', 'address') }}</label>
+    	{{ Form::textarea('address', $student->address, array('id' => 'address')) }}
+    </div>
+
+    <div class="block">
+		{{ Form::submit('submit', 'Edit Student', array('id' => 'add', 'class' => 'button button-green')) }}
+		<a href="{{ \Uri::create("$adminUrl/course/student") }}" class="button button-red">Cancel</a>
+	</div>	
+
+	{{ Form::end() }}
+
+</div>

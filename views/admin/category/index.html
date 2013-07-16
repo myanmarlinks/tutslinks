@@ -1,0 +1,103 @@
+<div id="main-form-wrapper">
+	<div id="form-wrapper">
+		<div id="form-left">
+			{{ if($categories->count() > 0 ) }}
+				{{ Form::start(ADMIN_URL.'course/category/delete') }}
+				<table class="stripe">
+					<thead>
+						<tr>
+							<th width="10%">{{ Form::checkbox('action_to_all', '', array('class' => 'check-all')) }}</th>
+							<th width="30%">Category Name</th>
+							<th width="30%">Description</th>
+							<th width="30%">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{= $a = 1; =}
+						{{ loop($categories as $category) }}
+						<tr>
+							<td class="check-box">{{ Form::checkbox('action_to[]', $category->id, array('id' => 'action'.$a)) }}</td>
+							<td>{{ $category->name }}</td>
+							<td>{{ $category->description }}</td>
+							<td>
+								<a href="{{ adminUrl('course/category/edit/'.$category->id) }}" title = "Edit" class="ico-button button-green tipsy-tip tag-edit" id="tag-edit"><i class="icon-edit icon-white"></i></a>
+								<a href="{{ adminUrl('course/category/delete/'.$category->id) }}" title = "Delete" class="ico-button button-red confirm_delete tipsy-tip"><i class="icon-trash2 icon-white"></i></a>
+							</td>
+						</tr>
+						{= $a++ =}
+						{{ endloop }}
+					</tbody>
+				</table> <!-- end of stripe -->
+				<div class="button-wrapper" id="delete_select">
+					{{ Form::submit('submit_delete', 'Delete Selected', array('class' => 'confirm_delete button button-red', 'disabled' => 'disabled')) }}
+					{{ Form::end() }}
+				</div>
+			{{ else }}
+				<div id="no-index-data">
+					<p>You have no category in this moment</p>
+			</div>
+			{{ endif }}
+		</div> <!-- end of form-left -->
+		<div id="form-right">
+			<div id="option-control" class="r-m-c">
+
+				<a kind="click" href="javascript:void(0);">
+					<span class="tt"></span>
+					<span>Create New Category</span>
+				</a>
+
+			</div> <!-- end of div.r-container#option-control -->
+			{{ $form }}
+		</div> <!-- end of form-right -->
+	</div> <!-- end of form-wrapper -->
+</div> <!-- end of main-form-wrapper -->
+<style type="text/css">
+	#delete_select { margin-bottom: 10px;}
+	.c-a-b { margin-bottom: 10px;}
+	.tag-name, .tg-box-del { cursor: pointer; }
+	.tag-name { color: #612FAA;}
+	.tg-name {
+		border: 1px solid #CDCDCD;
+		-webkit-border-radius: 13px;
+		-moz-border-radius: 13px;
+		-ms-border-radius: 13px;
+		border-radius: 13px;
+		color: #565656;
+		padding: 5px 12px;
+		width: 135px;
+	}
+	.tag-edit-box { margin-top: 10px;}
+	.tag-edit-form { position: relative;}
+	.loading { position: absolute; left: 129px; top: -3px; }
+	.tg-box-save { padding: 3px 10px; margin: 0 10px 0 20px;}
+	.tg-box-del { color: #F44646;}
+	span.helper { font-size: 10px; font-style: oblique; font-weight: normal;}
+</style>
+
+<script type="text/javascript">
+	$('.tag-edit').colorbox({
+		innerWidth: 400,
+		onComplete: function() {
+			$.colorbox.resize();
+			$('form#tag-create').live('submit', function(e){
+				e.preventDefault();
+				var form_data = $(this).serialize();
+				var form_url = $(this).attr('action');
+				$.post(form_url, form_data, function(obj){
+					var data = jQuery.parseJSON(obj);
+					if(data.status == 'ok') {
+						$('#msg-box').addClass('msg-success');
+						$('#msg-box').html(data.msg);
+						window.location.reload();
+						$.colorbox.close();
+					} else {
+						$('#msg-box').addClass('msg-error');
+						$('#msg-box').html(data.msg);
+						console.log(data.msg);
+						$.colorbox.resize();
+					}
+				});
+			});
+		}
+	});
+</script>

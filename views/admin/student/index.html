@@ -1,0 +1,9 @@
+<div id="filter-bar">
+	{{ Form::start(adminUrl('course/student/search'), 'filter-form',false, array('class' => 'form')) }}
+		{{ Form::label('Student Search :','term') }}
+		{{ Form::input('term','','text', array('id' => 'filter-box','class' => 'small thin', 'placeholder' => 'Enter student name')) }}
+	{{ Form::end() }}
+</div>
+<div id="data_table_wrapper">
+	{{ $data_table }}
+</div>

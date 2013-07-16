@@ -1,0 +1,25 @@
+<div id="instructor-container">
+	
+	{{ Form::start("$adminUrl/course/instructor/edit/$user->id", 'instructor_add_form', false, array('class' => 'form')) }}
+
+	<div class="form-block">
+		<label for="">{{ Form::label('Edit Instructor name', 'instructor') }}<span class="required"></span></label>
+		
+		<div class="form-right-block">
+			{{ Form::input('name', $user->name, 'text', array('id' => 'instructor') ) }}
+		</div> <!-- end of form-right-block -->
+	</div> <!-- end of form block -->
+
+	<div class="form-block">
+    	<label for="">{{ Form::label('Biography', 'biography') }}</label>
+    	{{ Form::textarea('biography', $user->biography, array('id' => 'biography')) }}
+    </div>
+
+    <div class="block">
+		{{ Form::submit('submit', 'Edit Instructor', array('id' => 'add', 'class' => 'button button-green')) }}
+		<a href="{{ \Uri::create("$adminUrl/course/instructor") }}" class="button button-red">Cancel</a>
+	</div>	
+
+	{{ Form::end() }}
+
+</div>

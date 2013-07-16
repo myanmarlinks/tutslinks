@@ -1,0 +1,16 @@
+<div id="login-box-btn" class="nav-hidder-btn" data-target="#login-form">
+	<i class="ico-add"></i>
+	<span>Login</span>
+</div>
+<div id="login-form" class="nav-hidder-body">		
+
+	{{ Form::start("user/login", false, 'login', array('class' => 'form-inline')) }}
+		{{ Security::CSRField('user') }}
+		{{ Form::input('email', '', 'text', array('id' => 'email', 'placeholder' => 'Email')) }}
+		{{ Form::password('password', '', array('id' => 'password', 'placeholder' => 'Password')) }}
+
+		{{ Form::hidden('remember', 1) }}
+
+		{{ Form::submit('submit', 'Login', array('id' => 'login-btn', 'class' => 'btn btn-red')) }}
+	{{ Form::end() }}
+</div>

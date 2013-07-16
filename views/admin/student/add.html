@@ -1,0 +1,43 @@
+<div id="instructor-container">
+
+	{{ if(empty($student)) }}
+		
+		<div id="no-index-data">
+			Sorry, no user to add as Student. Please create new user in appropriate group to add new.
+		</div>
+	
+	{{ else }}
+	
+	{{ Form::start("$adminUrl/course/student/add", 'student_add_form', false, array('class' => 'form')) }}
+
+	<div class="form-block">
+		<label for="">{{ Form::label('Choose new Student', 'student') }}<span class="required"></span></label>
+		
+		<div class="form-right-block">
+			{{ Form::select('student', $student, '' ) }}
+		</div> <!-- end of form-right-block -->
+	</div> <!-- end of form block -->
+
+	<div class="form-block">
+		<label for="">{{ Form::label('Ph Number', 'phno') }}<span class="required"></span></label>
+		
+		<div class="form-right-block">
+			{{ Form::input('phno', '', 'text', array('id' => 'phNo')) }}
+		</div> <!-- end of form-right-block -->
+	</div> <!-- end of form block -->
+
+	<div class="form-block">
+    	<label for="">{{ Form::label('Address', 'address') }}</label>
+    	{{ Form::textarea('address', '', array('id' => 'address')) }}
+    </div>
+
+    <div class="block">
+		{{ Form::submit('submit', 'Add', array('id' => 'add', 'class' => 'button button-green')) }}
+		<a href="{{ \Uri::create("$adminUrl/course/student") }}" class="button button-red">Cancel</a>
+	</div>	
+
+	{{ Form::end() }}
+
+	{{ endif }}
+
+</div>

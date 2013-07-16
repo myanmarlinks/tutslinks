@@ -1,0 +1,62 @@
+<div class="student-wrapper clearfix">
+
+{{ Form::start("course/profile-edit", false, 'login', array('class' => 'form-inline')) }}
+	{{ Security::CSRField('profile') }}
+
+	<div class="f-block">
+		{{ Form::label('Display Name', 'name') }}
+		<div class="field">
+			{{ Form::input('name', $student->name, 'text', array('class' => 'name')) }}
+		</div>
+	</div>
+
+	<div class="f-block">
+		{{ Form::label('Email', 'email') }}
+		<div class="field">
+			{{ Form::email('email', $user->email, array('class' => 'email')) }}
+			<p class="student-gravy"><small>{{ gravatar($user->email, 30) }}<a href="http://gravatar.com">Change your avatar at Gravatar.com.</a></small></p>
+		</div>
+	</div>
+
+	<div class="f-block">
+		{{ Form::label('Facebook', 'facebook') }}
+		<div class="field">
+			{{ Form::input('facebook', $usermeta->facebook, 'text', array('class' => 'facebook')) }}
+		</div>
+	</div>
+
+	<div class="f-block">
+		{{ Form::label('Twitter', 'twitter') }}
+		<div class="field">
+			{{ Form::input('twitter', $usermeta->twitter, 'text', array('class' => 'twitter')) }}
+		</div>
+	</div>
+
+	<div class="f-block">
+		{{ Form::label('Website', 'website') }}
+		<div class="field">
+			{{ Form::input('website', $usermeta->website, 'text', array('class' => 'website')) }}
+		</div>
+	</div>
+
+	<div class="f-block">
+		{{ Form::label('Phone Number', 'phno') }}
+		<div class="field">
+			{{ Form::input('phno', $student->phno, 'text', array('class' => 'facebook')) }}
+		</div>
+	</div>
+
+	<div class="f-block">
+		{{ Form::label('Address', 'address') }}
+		<div class="field">
+			{{ Form::textarea('address', $student->address, array('class' => 'address')) }}
+		</div>
+	</div>
+
+	<div class="f-block f-btns">
+		{{ Form::submit('submit', 'Update Profile', array('id' => 'update-profile', 'class' => 'btn btn-red')) }}
+	</div>
+
+{{ Form::end() }}
+
+</div>

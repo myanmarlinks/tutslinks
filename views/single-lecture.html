@@ -1,0 +1,81 @@
+<div class="clearfix">
+	<!-- CONTECT AREA -->
+	<div class="col plus-2" id="course-container">
+		<div class="course-header clearfix">
+			<div class="badge">
+	            <div>
+	            	{{ if($lecture->course['attachment']) }}
+	            		<img src="{{ $lecture->course['attachment'] }}" alt="" />
+	            	{{ endif }}
+	            </div>
+	        </div>
+	        <h1>{{ $lecture->title }}</h1>
+	        <div class="course-meta">
+	        	<span class="meta-date">
+	        		<i class="ico-cal ico-gray"></i>
+					{{ date('Y M d', $lecture->created_at->sec) }}
+	        	</span>
+	        	<span class="meta-separator"></span>
+	        	<span class="meta-category">
+	        		<i class="ico-category ico-gray"></i>
+	        		<a href="{{ rbUrl('course/').$lecture->course['slug'] }}">{{ $lecture->course['title'] }}</a>
+	        	</span>
+	        </div>
+		</div> <!-- endof .course-header -->
+
+		<div class="course-desc" id="markdownLec">
+			{{ $lecture->body }}
+	    </div>
+	</div> <!-- /#course-container -->
+
+    <!-- SIDE BAR AREA -->
+
+	<div class="col sidebar-lecture" id="sidebar">
+		<h4>Related Lectures</h4>
+		{{ if($relatedLectures) }}
+		<ul id="related-lectures" class="clearfix">
+			{{ loop($relatedLectures as $rLec) }}
+
+				<li>
+					<img src="{{ $rLec->course['attachment'] }}">
+					<div class="lecture-info">
+						<h6><a href="{{ rbUrl('course/lecture').$rLec->slug }}">{{ $rLec->title }}</a></h6>
+						<p>Part: {{ $rLec->part }}</p>
+					</div>
+				</li>
+
+			{{ endloop }}
+		</ul>
+		{{ endif }}
+
+	</div> <!-- end of #sidebar -->
+</div>
+
+<div id="otherCourses">
+	<h4>You may also like..</h4>
+		{{ if($relatedLectures) }}
+		<ul id="other-courses" class="clearfix">
+			{{ loop($courses as $course) }}
+
+				<li>
+					<img src="{{ $course->attachment }}">
+					<div class="lecture-info">
+						<h6><a href="{{ rbUrl('course/view').$course->slug }}">{{ $course->title }}</a></h6>
+						<p>In: {{ $course->category['name'] }}</p>
+					</div>
+				</li>
+
+			{{ endloop }}
+		</ul>
+	{{ endif }}
+</div> <!-- end of #otherCourses -->
+
+<script type="text/javascript">
+
+ 	var text = document.getElementById('markdownLec');
+	//var converter = new Showdown.converter();
+	var converter = new Showdown.converter();
+	var html = converter.makeHtml(text.innerHTML);
+	document.getElementById("markdownLec").innerHTML = html;
+
+</script>

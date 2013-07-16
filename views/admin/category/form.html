@@ -1,0 +1,55 @@
+{{ if(!isset($method)) }}
+	{= $method = 'create' =}
+{{ endif }}
+
+<div class="r-container tag-add-box">
+	{{ Form::start(ADMIN_URL.'/course/category/'.$method, 'category-create', false, array('class' => 'form')) }}
+	<div class="c-a-b">
+		<span id="msg-box"></span>
+		<div>
+			<span>Category Name<span class="required"></span></span>
+		</div>
+
+
+		{{ if(isset($val_errors['name'])) }}
+			<span class="error">{{ $val_errors['name'] }}</span>
+		{{ endif }}
+		{{ Form::input('name', isset($category->name) ? $category->name : '', 'text', array('class' => 'xx-large thin', 'id' => 'form_title')) }}
+
+	</div> <!-- end of div.c-a-b -->
+
+	<div class="c-a-b">
+
+		<div>
+			<span>Slug<span class="required"></span></span>
+		</div>
+		
+			{{ if(isset($val_errors['slug'])) }}
+				<span class="error">{{ $val_errors['slug'] }}</span>
+			{{ endif }}	
+			{{ Form::input('slug', isset($category->slug) ? $category->slug : '', 'text', array('class' => 'xx-large thin', 'id' => 'form_slug')) }}
+	
+	</div> <!-- end of div.c-a-b -->
+
+	<div class="c-a-b">
+
+		<div>
+			<span>Description</span>
+		</div>
+
+		{{ Form::textarea('description', isset($category->description) ? $category->description : '', array('style' => 'width:90%;height:40%;')) }}
+
+	</div> <!-- end of div.c-a-b -->
+
+	<div class="c-a-b">
+		{{ if($method == 'edit') }}
+			{{ Form::hidden('id', isset($category->id) ? $category->id : '') }}
+		{{ endif }}
+		
+		{{ Form::submit('add-new-cat-btn', 'Save', array('class' => 'button button-green')) }}
+
+	</div> <!-- end of div.c-a-b -->
+
+{{ Form::end() }}
+
+</div> <!-- end of div.r-container -->

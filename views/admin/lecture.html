@@ -1,0 +1,70 @@
+<div class="single-course">
+
+	<div class="course-feature">
+		<img src="{{ $course->attachment }}" class="course-feature">
+	</div>
+	<h3>
+		{{ $course->title }}
+		<a href="{{ adminUrl('course/lecture/create/'.$course->id) }}" class="long-button add">Add New Lecture</a>
+	</h3>
+
+	<p>Posted in {{ $course->category['name']  }} by {{ $course->instructor['name'] }}</p>
+
+
+{{ if(count($lectures) > 0) }}
+	{# multi_delete #}
+	{{ Form::start(ADMIN_URL.'/course/lecture/delete') }}
+	<table class="stripe">
+		<thead>
+			<tr>
+				<th width="5%">{{ Form::checkbox('action_to_all', '', array('class' => 'check-all')) }}</th>
+				<th width="20%">Title</th>
+				<th width="15%">Part</th>
+				<th width="15%">Posted On</th>
+				<th width="19%">Actions</th>
+			</tr>	
+		</thead>
+		<tbody>
+			{= $a = 1; =}
+			{{ loop($lectures as $lecture) }}
+			<tr>
+				<td class="checkbox">{{ Form::checkbox('action_to[]', $lecture->id, array('id' => 'action'.$a)) }}</td>
+				<td>
+					<span class="bg-title">
+						{{ $lecture->title }}
+						{{ if($lecture->status == 'draft') }}
+							<a href="{{ 'admin/course/lecture/changeStatus/'.$lecture->id }}">
+								<span class="label label-info">Draft</span>
+							</a>
+						{{ endif }}
+					</span>
+				</td>
+				<td>
+					{{ $lecture->part  }}
+				</td>
+				<td>
+					{{ date('Y-m-d H:i:s', $lecture->created_at->sec); }}
+				</td>
+				<td>
+					<a href="{{ rbUrl('course/lecture/'.$lecture->slug) }}" title="View" class="ico-button button-blue tipsy-tip"><i class="icon-view2 icon-white"></i></a>
+					<a href="{{ adminUrl('course/lecture/edit/'.$lecture->id) }}" title="Edit" class="ico-button button-green tipsy-tip"><i class="icon-edit icon-white"></i></a>
+					<a href="{{ adminUrl('course/lecture/delete/'.$lecture->id) }}" title="Delete" class="ico-button button-red confirm_delete tipsy-tip"><i class="icon-trash2 icon-white"></i></a>
+				</td>
+			</tr>
+			{= $a++ =}
+			{{ endloop }}
+		</tbody>
+	</table>
+	<div class="button-wrapper" id="delete_select">
+		{{ Form::submit('submit_delete', 'Delete Selected', array('class' => 'confirm_delete button button-red', 'disabled' => 'disabled')) }}
+		<a href="{{ adminUrl('course') }}" class="button">Back</a>
+
+		{{ Form::end() }}
+	</div>
+{{ else }}
+	<div id="no-index-data">
+		There is no lecture added yet!
+	</div>
+{{ endif }}
+
+</div>

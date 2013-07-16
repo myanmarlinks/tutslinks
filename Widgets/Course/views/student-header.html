@@ -1,0 +1,11 @@
+<ul id="user-panel">
+	<li><a href="{{ rbUrl() }}">Home</a></li>
+	<li><a href="{{ rbUrl('course') }}">Courses</a></li>
+	<li><a href="#" class="currentStudent">{{ $name }}</a>
+		<ul class="user-dropdown">
+			<li><a href="{{ rbUrl('user/edit') }}">Edit Profile</a></li>
+			<li><a href="{{ rbUrl('user/change-password') }}">Change Password</a></li>
+			<li><a href="{{ rbUrl('user/logout') }}">Logout</a></li>
+		</ul>
+	</li>
+</ul>

@@ -1,0 +1,25 @@
+{{ loop($courses as $course) }}
+
+<div class="course">
+	<div class="course-feature">
+		<img src="{{ $course->attachment }}" class="course-feature">
+		{{ if($course->status == 'draft') }}
+			<span class="label label-info">Draft</span>
+		{{ elseif ($course->status == 'live') }}
+			<span class="label label-success">Live</span>		
+		{{ endif }}
+	</div>
+	<h3>
+		<a href="{{ rbUrl('course/view/'.$course->slug) }}" class="course-title">{{ $course->title }}</a>
+	</h3>
+
+	<p>Posted in {{ $course->category['name']  }} by {{ $course->instructor['name'] }}</p>
+
+	<ul class="course-action">
+		<li><a href="{{ adminUrl('course/view/'.$course->id) }}">Manage Lectures</a></li>
+		<li><a href="{{ adminUrl('course/edit/'.$course->id) }}">Edit Course</a></li>
+		<li><a href="{{ adminUrl('course/delete/'.$course->id) }}">Delete Course</a></li>
+	</ul>
+</div>
+
+{{ endloop }}

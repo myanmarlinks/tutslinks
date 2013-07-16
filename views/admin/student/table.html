@@ -1,0 +1,51 @@
+{{ if(count($students) > 0) }}
+
+<div class="student-wrapper">
+	
+	{{ loop($students as $s) }}
+
+	<div class="student">
+		{{ gravatar($s->email, 60) }}
+		<div class="student-info">
+			<span class="name">{{ $s->name }}</span>
+			<span class="studentid">StudentID: {{ $s->userid }}</span>
+			<span class="email">{{ $s->email }}</span>
+		</div>
+		<div class="student-action clearfix">
+			<a href="{{ \Uri::create("$adminUrl/course/student/edit/") }}{{ $s->id }}" class="edit">Edit Student</a>
+			<a href="{{ \Uri::create("$adminUrl/course/student/remove/") }}{{ $s->id }}" class="delete">Delete Student</a>
+		</div>
+	</div>
+
+	{{ endloop }}
+
+</div>
+
+<!-- <table class="stripe">
+	<thead>
+		<tr>
+			<th>StudentID</th>
+			<th>Student Name</th>
+			<th>Mail Address</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	{{ loop($students as $s) }}
+			<tr>
+				<td>{{ $s->userid }}</td>
+				<td>{{ $s->name }}</td>
+				<td>{{ $s->email }}</td>
+				<td>
+					<a href="{{ \Uri::create("$adminUrl/course/student/edit/") }}{{ $s->id }}" class="ico-button button-green tipsy-tip" original-title="Edit"><i class="icon-edit icon-white"></i></a>
+					<a href="{{ \Uri::create("$adminUrl/course/student/remove/") }}{{ $s->id }}" class="ico-button button-red tipsy-tip confirm_delete" original-title="Remove"><i class="icon-cross2 icon-white"></i></a>
+				</td>
+			</tr>
+	{{ endloop }}
+	</tbody>
+</table> -->
+{{ else }}
+	<div id="no-index-data">
+		No Students Found!
+	</div>
+{{ endif }}

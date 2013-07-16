@@ -1,0 +1,35 @@
+<div id="instructor-container">
+
+	{{ if(empty($instructor)) }}
+		
+		<div id="no-index-data">
+			Sorry, no user to add as Instructor. Please create new user in appropriate group to add new.
+		</div>
+	
+	{{ else }}
+	
+	{{ Form::start("$adminUrl/course/instructor/add", 'instructor_add_form', false, array('class' => 'form')) }}
+
+	<div class="form-block">
+		<label for="">{{ Form::label('Choose new Instructor', 'instructor') }}<span class="required"></span></label>
+		
+		<div class="form-right-block">
+			{{ Form::select('instructor', $instructor, '' ) }}
+		</div> <!-- end of form-right-block -->
+	</div> <!-- end of form block -->
+
+	<div class="form-block">
+    	<label for="">{{ Form::label('Biography', 'biography') }}</label>
+    	{{ Form::textarea('biography', '', array('id' => 'biography')) }}
+    </div>
+
+    <div class="block">
+		{{ Form::submit('submit', 'Add', array('id' => 'add', 'class' => 'button button-green')) }}
+		<a href="{{ \Uri::create("$adminUrl/course/instructor") }}" class="button button-red">Cancel</a>
+	</div>	
+
+	{{ Form::end() }}
+
+	{{ endif }}
+
+</div>

@@ -1,0 +1,46 @@
+<div class="student-wrapper clearfix">
+		
+	{{ if($student) }}
+	<div id="image-wrapper">
+
+		<div class="student-left">
+			{{ gravatar($student->email, 100) }}
+			<div class="student-socials">
+				<a href="http://www.facebook.com/{{ $usermeta->facebook }}">Facebook</a>
+				<a href="http://twitter.com/{{ $usermeta->twitter }}">Twitter</a>
+			</div>
+		</div>
+
+		<h3>{{ $student->name }}</h3>
+		<ul class="student-actions">
+			<li><a href="{{ rbUrl('course/profile-edit') }}" class="btn btn-sky">Edit Profile</a></li>
+			<li><a href="{{ rbUrl('course/change-password') }}" class="btn btn-sky">Change Password</a></li>
+		</ul>
+
+		<div id="info-wrapper">
+			<table class="stripe borderless">
+				<tr>
+					<td>Email :</td>
+					<td>{{ $student->email }}</td>
+				</tr>
+				<tr>
+					<td>Website :</td>
+					<td><a href="{{ $usermeta->website }}">{{ $usermeta->website }}</a></td>
+				</tr>
+				<tr>
+					<td>Phone Number :</td>
+					<td>{{ $student->phno }}</td>
+				</tr>
+				<tr>
+					<td>Address :</td>
+					<td>{{ $student->address }}</td>
+				</tr>
+			</table>
+
+		</div>
+
+	</div>
+
+	{{ endif }}
+
+</div>

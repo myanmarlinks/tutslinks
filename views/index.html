@@ -1,0 +1,39 @@
+	<div class="wrapper" id="course-archive-wrapper">
+		<div class="container">
+			<h2>Courses</h2>
+
+			<div class="clearfix">
+				{{ loop($courses as $course) }}
+				<div class="course-block">
+					<a href="{{ rbUrl('course/view/').$course->slug }}">
+					<div class="course-block-head clearfix">
+						<div class="badge">
+							<div class="badge">
+								<img src="{{ $course->attachment }}" alt="" class="course-feature-image">
+							</div>
+						</div>
+						<h3>{{ $course->title }}</h3>
+					</div> <!-- end of .course-block-head -->
+					<p>{{ $course->description }}</p>
+					</a>
+					<div class="course-meta">
+						<span class="meta-author">
+		            		<i class="ico-user ico-gray"></i>{{ $course->instructor['name'] }}
+		            	</span>
+						<span class="meta-separator"></span>
+		            	<span class="meta-date">
+		            		<i class="ico-cal ico-gray"></i>{{ date('Y M d', $course->created_at->sec) }}
+		            	</span>
+		            	<span class="meta-separator"></span>
+		            	<span class="meta-category">
+		            		<i class="ico-category ico-gray"></i>
+		            		<a href="#">{{ $course->category['name'] }}</a>
+		            	</span>
+					</div> <!-- end of .course-meta -->
+				</div> <!-- end of .course-block -->
+
+				{{ endloop }}
+			</div>
+
+		</div>
+	</div> <!-- end of #course-archive-wrapper -->

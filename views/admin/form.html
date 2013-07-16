@@ -1,0 +1,149 @@
+{{ Form::start('admin/course/'.$method, 'course_create_form', false, array('class' => 'form')) }}
+{{ Security::CSRField() }}
+{{ Form::hidden('id', isset($course->id) ? $course->id : '', array('id' => 'course_id')) }}
+<div id="main-form-wrapper">
+    <div id="form-wrapper">
+        <div id="form-left">
+			<div class="form-block first-block" id="title-slug">
+                {{ Form::label('Title <span class="required"></span>', 'title') }}
+				<div class="form-right-block">
+                    {{ if(isset($val_errors['title'])) }}
+                        <span class="msg error">{{ $val_errors['title'] }}</span>
+                    {{ endif }}
+                     {{ Form::input('title', isset($course->title) ? $course->title : '','text',array('class' => 'xx-large thin', 'id' => 'form_title')) }}
+				</div> <!-- end of form-right-block -->
+    		</div> <!-- end of form block -->
+
+            <div class="form-block first-block" id="title-slug">
+                {{ Form::label('Slug <span class="required"></span>','slug') }}
+                <div class="form-right-block">
+                    {{ if(isset($val_errors['slug'])) }}
+                        <span class="msg error">{{ $val_errors['slug'] }}</span>
+                    {{ endif }}
+                    {{ Form::input('slug', isset($course->slug) ? $course->slug : '','text',array('class' => 'xx-large thin', 'id' => 'form_slug')) }}
+                </div> <!-- end of form-right-block -->
+            </div> <!-- end of form block -->
+
+    		<div class="form-block">
+    			<label for="">{{ Form::label('Description', 'description') }}</label>
+    			{{ Form::textarea('description', isset($course->description) ? $course->description : '', array('id' => 'description')) }}
+    		</div>
+
+            <div class="form-block">
+                <label for="">{{ Form::label('Level', 'level') }}</label>
+                {{ Form::textarea('level', isset($course->level) ? $course->level : '', array('id' => 'level')) }}
+            </div>
+
+            <div class="form-block">
+                <label for="">{{ Form::label('Requirements', 'requirement') }}</label>
+                {{ Form::textarea('requirement', isset($course->requirement) ? $course->requirement : '', array('id' => 'requirement')) }}
+            </div>
+	  	</div> <!-- end of form-left -->
+      	<!-- ***** END of LEFT Wrapper ***** -->
+    
+    	<div id="form-right">
+
+    		<div id="option-control" class="r-m-c selected">
+            	<a kind="click" href="javascript:void(0);">
+	                <span class="tt"></span>
+    	            <span>Course Settings</span>
+        	    </a>
+        	</div> <!-- end of div.r-container#option-control -->
+
+    		<div class="r-container">
+            	<a href="javascript:void(0);" class="r-i-b">
+                	<div>
+                    	<i class="icon-grey icon-user"></i><span>Instructor</span>
+                	</div>
+            	</a>
+            
+	            <div class="r-i-b-h">
+	            	{{ Form::select('instructor', $instructor, isset($currentInstructor) ? $currentInstructor : '', array('class' => 'thin xx-large') ) }}
+	            </div>
+        	</div> <!-- end of div.r-container -->
+
+            <div class="r-container">
+                <a href="javascript:void(0);" class="r-i-b">
+                    <div>
+                        <i class="icon-grey icon-archive"></i><span>Course Category</span>
+                    </div>
+                </a>
+                <div class="r-i-b-h">
+                    {{ Form::select('category', $category, isset($currentCategory) ? $currentCategory : '', array('class' => 'thin xx-large') ) }}
+
+                </div>
+            </div> <!-- end of div.r-container -->
+
+        	<div class="r-container">
+                <a href="javascript:void(0);" class="r-i-b">
+	                <div>
+	                   <i class="icon-grey icon-time"></i><span>Schedule</span>
+	                </div>
+                </a>
+
+                <div class="r-i-b-h" id="schdule_opt">
+
+                    {{ Form::radioGroup('sch_type', array('auto' => 'Set Automatically', 'manual' => 'Set Manually'), 'auto'); }}
+                    {{ if(isset($course->created_at)) }}
+                        <span class="sch-data">
+                            {{ $course->created_at }}
+                        </span>
+                    {{ endif }}
+                    
+                    <div id="manual-sch">
+                        {{ Form::input('date',isset($course->created_at) ? $course->created_at : '', 'text', array('class' => 'thin xx-large', 'id' => 'datepicker')) }}                        
+                    </div>
+
+                </div>
+            </div> <!-- end of div.r-container -->
+
+            <div class="r-container">
+
+                <a href="javascript:void(0);" class="r-i-b">
+                    <div>
+                        <i class="icon-grey icon-setting"></i>
+                        <span>Course Status</span>
+                    </div>
+                </a>
+
+                <div class="r-i-b-h">
+                    {{ Form::select('status', array('live' => 'Live', 'draft' => 'Draft'), isset($course->status) ? $course->status : 'Live', array('class' => 'thin xx-large')) }}
+                </div>
+
+            </div> <!-- end of div.r-container -->
+
+             <div class="r-container">
+                    <a href="javascript:void(0);" class="r-i-b">
+                        <div>
+                            <i class="icon-grey icon-media"></i>
+                            <span>Feature Image</span>
+                        </div>
+                    </a>
+
+                    <div class="r-i-b-h">
+                        {{ if ($method == 'edit' and $course->attachment != null) }}
+                            <div id="featured_preview">
+                                <img id='featured_image' src='{{ $course->attachment }}'>
+                            </div>
+                            {{ Form::hidden('featured_id', $course->attachment) }}
+                            <a href="{{ adminUrl('media/featureImage') }}" id="featured_add_btn" style="display:none"><i class="icon-circleplus icon-grey"></i>Add Feature Image</a>
+                            <a href="javascript:void(0);" id="featured_remove_btn"><i class="icon-circleminus icon-grey"></i>Remove Feature Image</a>
+                        {{ else }}
+                            <div id="featured_preview"></div>
+                            {{ Form::hidden('featured_id') }}
+                            <a href="{{ adminUrl('media/featureImage') }}" id="featured_add_btn"><i class="icon-circleplus icon-grey"></i>Add Featuer Image</a>
+                            <a href="javascript:void(0);" id="featured_remove_btn" style="display:none"><i class="icon-circleminus icon-grey"></i>Remove Feature Image</a>
+                        {{ endif }}
+                    </div>
+
+                </div> <!-- end of div.r-container -->
+    	</div> <!-- /form-right -->
+
+	    <div class="form-block form-action button-wrapper">
+			{{ Form::submit('submit', $method == 'create' ? 'Create' : 'Edit', array('id' => 'add', 'class' => 'button button-green')) }}
+			<a href="{{ \Uri::create("$adminUrl/course") }}" class="button button-red">Cancel</a>
+	    </div> <!-- end of form-block -->
+
+    </div> <!-- end of div#form-wrapper -->
+</div> <!-- end of div#main-form-wrapper -->
+{{ Form::end() }}

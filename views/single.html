@@ -1,0 +1,84 @@
+<!-- CONTECT AREA -->
+<div class="col plus-2" id="course-container">
+
+<div class="course-header clearfix">
+		<div class="badge">
+            <div>
+            	<img src="{{ $course->attachment }}" alt="">
+            </div>
+        </div>
+        <h1>{{ $course->title }}</h1>
+        <div class="course-meta">
+        	<span class="meta-date">
+        		<i class="ico-cal ico-gray"></i>
+				{{ date('Y M d', $course->created_at->sec) }}
+        	</span>
+        	<span class="meta-separator"></span>
+        	<span class="meta-category">
+        		<i class="ico-category ico-gray"></i>
+        		<a href="#">{{ $course->category['name'] }}</a>
+        	</span>
+        </div>
+	</div> <!-- endof .course-header -->
+
+	<p class="course-desc">
+    	{{ $course->description }}
+    </p>
+	
+	<div class="course-outline">
+	{{ if($lectures) }}
+		<table class="stripe borderless">
+			<thead>
+				<tr>
+					<th>Lessons</th>
+					<th width="10%">Part</th>
+					<th width="30%">Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{ loop ($lectures as $lecture) }}
+				<tr>
+					{{ if ($lecture->status == 'live') }}
+					<td><a href="{{ rbUrl('course/lecture/').$lecture->slug }}">{{ $lecture->title }}</a></td>
+					<td>{{ $lecture->part }}</td>
+					<td class="course-complete">Complete</td>
+					{{ else }}
+					<td>{{ $lecture->title }}</td>
+					<td>{{ $lecture->part }}</td>
+					<td class="course-ongoing">Ongoing</td>
+					{{ endif }}
+				</tr>
+				{{ endloop }}
+			</tbody>
+		</table>
+	{{ else }}
+		<div id="noLectures">
+			<h3>No Lecture is added to this course yet.</h3>
+		</div>
+	{{ endif }}
+	</div> <!-- end of #course-outline -->
+</div> <!-- /#course-container -->
+
+
+    <!-- SIDE BAR AREA -->
+
+	<div class="col" id="sidebar">
+		<div class="profile-box clearfix">
+			<h2>Instructor</h2>
+			{{ $gravy }}
+			<h3><small>{{ $course->instructor['name']}}</small></h3>
+			<p>{{ $course->instructor['biography']}}</p>
+			<a href="#" class="go-profile">View Profile &raquo;</a>
+		</div> <!-- end of .profile-box -->
+
+		<div class="who-is">
+			<h3>Who is this course for?</h3>
+			<p>{{ $course->level }}</p>
+		</div> <!-- end of .who-is -->
+
+		<div class="course-requirement">
+			<h3>Requirement</h3>
+			<p>{{ $course->requirement }}</p>
+		</div>
+
+	</div> <!-- end of #sidebar -->
