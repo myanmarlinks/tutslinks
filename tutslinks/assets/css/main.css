@@ -1,0 +1,197 @@
+.search-box {
+	height: 57px;
+	margin-left: 20px;
+}
+.search-box input[type=search], .search-box input[type=text] {
+	border: 1px solid #AB2829;
+}
+.search-box a.btn {
+	padding: 6px 15px 5px;
+	background: #9c2e23;
+	margin-left: 5px;
+}
+.search-box a i {
+	color: #E53738;
+	font-size: 48px;
+	height: 45px;
+	width: 45px;
+	vertical-align: text-top;
+}
+
+.gravatar {
+	border: 5px solid #ffffff;
+}
+
+/* Lectuer Single */
+
+.sidebar-lecture h4 {
+	margin-bottom: 20px;
+	font-weight: normal;
+}
+
+.sidebar-lecture ul {
+	margin: 0px;
+	margin-bottom: 20px;
+}
+
+.sidebar-lecture ul li {
+	list-style: none;
+	margin-bottom: 10px;
+	min-height: 85px;
+}
+
+.sidebar-lecture ul li img {
+	width: 75px;
+	height: 75px;
+	float: left;
+	border: 2px solid #dddddd;
+	border-radius: 50%;
+}
+
+.sidebar-lecture ul div.lecture-info {
+	margin-left: 90px;
+}
+
+/* Student Profile */
+
+.student-wrapper {
+	margin: 20px 0;
+}
+
+#image-wrapper .student-left {
+	width: 100px;
+	float: left;
+}
+
+.student-left .gravatar {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+
+#image-wrapper h3, #image-wrapper ul, #info-wrapper {
+	margin-left: 130px;
+	margin-bottom: 20px;
+}
+
+ul.student-actions li {
+	list-style: none;
+	float: left;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+ul.student-actions li a {
+	font-size: 12px;
+}
+
+p.student-gravy img { 
+	float:left;
+	width: 30px;
+	height: 30px;
+}
+
+p.student-gravy a {
+	float: left;
+	margin-top: 10px;
+}
+
+#user-panel {
+	position: relative;
+}
+
+#user-panel li {
+	float: left;
+	display: inline-block;
+	padding: 10px;
+	position: relative;
+}
+
+#user-panel li a {
+	color: #ffffff;
+	padding: 5px 11px;
+}
+
+#user-panel ul {
+	display: none;
+	position: absolute;
+	background: #fff;
+	top: 53px;
+	right: 0px;
+	border: 1px solid #efefef;
+	padding: 0 10px;
+}
+
+#user-panel ul li {
+	float: none;
+	display: block;
+	border-bottom: 1px solid rgb(247, 247, 247);
+	width: 120px;
+}
+
+#user-panel ul li:last-child {
+	border: 0px;
+}
+
+#user-panel ul li a {
+	color: #e53738;
+	padding: 0px;
+}
+
+#user-panel li a.active {
+	background: rgb(209, 36, 36);
+}
+
+#user-panel ul:before {
+	content: ' ';
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid #fff;
+	position: absolute;
+	top: -5px;
+	right: 28px;
+}
+
+.badge {
+	margin: 0px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+}
+
+.badge img {
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+}
+
+/* Other Courses*/
+
+#otherCourses { padding: 20px 0;}
+
+#otherCourses h4 {
+	font-weight: normal;
+	margin-bottom: 20px;
+}
+
+#otherCourses ul {
+	margin-left: 0px;
+}
+
+#otherCourses ul li {
+	float: left;
+	display: inline-block;
+	width: 200px;
+}
+
+#otherCourses ul li img {
+	width: 75px;
+	height: 75px;
+	float: left;
+	border: 2px solid #dddddd;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+#course-archive-wrapper .course-block { margin-right: 2%; }

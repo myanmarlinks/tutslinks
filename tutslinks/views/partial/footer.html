@@ -1,0 +1,76 @@
+<!-- ***** Area for the Footer Content ***** -->
+
+	<footer class="wrapper">
+
+		<div class="container">
+
+			<div class="three-col same-height" data-screen="768">
+				<div class="col">
+					<h3><i class="ico-site-about"></i>About Us</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+				</div>
+				<div class="col">
+					<h3><i class="ico-site-info"></i>Site Info</h3>
+					<ul class="clearfix sub-list">
+						<li><a href="#">About Us</a></li>
+						<li><a href="#">Terms &amp; Conditions</a></li>
+						<li><a href="#">Take a Tour</a></li>
+						<li><a href="#">Contact Us</a></li>
+					</ul>
+				</div>
+				<div class="col">
+					<h3><i class="ico-site-connect"></i>Connect With</h3>
+					<ul class="clearfix connect-list">
+						<li class="facebook"><a href="#">Facebook</a></li>
+						<li class="twitter"><a href="#">Twitter</a></li>
+						<li class="g-plus"><a href="#">Google</a></li>
+						<li class="rss"><a href="#">RSS</a></li>
+					</ul>
+				</div>
+			</div> <!-- end of .three-col -->
+
+			<div class="three-col footer-label">
+				<div class="col full-col h-clear">
+					<span class="f-left">copyright &copy; TutsLinks 2013 | All Right Reserved</span>
+					<span class="f-right">Product of
+						<a href="http://www.myanmarlinks.net" target="_balnk">Myanmar Links</a>
+					</span>
+				</div>
+			</div> <!-- end of .three-col -->
+		</div> <!-- end of .container -->
+	</footer>
+
+	{{ js("vendor/jquery-1.9.0.min.js") }}
+	{{ js("solid/solid.js") }}
+
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+
+	    //$('.course-desc').after(function(index){
+	    //return converter.makeHtml(text.innerHTML);
+	    //console.log(converter.makeHtml(text.innerHTML));
+	    //});
+		
+		 $('ul#user-panel').each(function() {
+		    var $dropdown = $(this);
+
+		    $("a.currentStudent", $dropdown).click(function(e) {
+		    	e.preventDefault();
+		    	$("a.currentStudent").addClass('active');
+		    	$("ul.user-dropdown", $dropdown).toggle();
+		    	return false;
+		    });
+		});
+		    
+		$('html').click(function(){
+			$("ul.user-dropdown").hide();
+			$("a.currentStudent").removeClass('active');
+		});
+
+	});
+
+	</script>
+
+</body>
+</html>
