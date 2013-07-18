@@ -283,11 +283,10 @@ class CourseController extends \PublicController
 	{
 		if (\Sentry::check() ) {
 			$user = \Sentry::getUser();
+			if($user->hasAccess('admin')) return false;
 			$instructor = Instructor::where('userid', '=', $user->id)->get();
 			if($instructor->isEmpty()) {
 				return true;
-			} elseif ($user->hasAccess('admin')) {
-				return false;
 			}
 			return false;
 		}
