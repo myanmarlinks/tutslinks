@@ -24,6 +24,13 @@
 	<p class="course-desc">
     	{{ $course->description }}
     </p>
+
+    {{ if($guest) }}
+    <a href="{{ rbUrl('user/register') }}" class="btn btn-red btn-full">
+	    <i class="ico-lock"></i>Sing Up to Unlock!
+	</a>
+	{{ endif }}
+
 	
 	<div class="course-outline">
 	{{ if($lectures) }}
@@ -39,7 +46,12 @@
 				{{ loop ($lectures as $lecture) }}
 				<tr>
 					{{ if ($lecture->status == 'live') }}
-					<td><a href="{{ rbUrl('course/lecture/').$lecture->slug }}">{{ $lecture->title }}</a></td>
+					{{ if($guest) }}
+						<td>{{ $lecture->title }}</td>
+					{{ else }}
+						<td><a href="{{ rbUrl('course/lecture/').$lecture->slug }}">{{ $lecture->title }}</a></td>
+					{{ endif }}
+
 					<td>{{ $lecture->part }}</td>
 					<td class="course-complete">Complete</td>
 					{{ else }}

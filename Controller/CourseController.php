@@ -56,6 +56,11 @@ class CourseController extends \PublicController
 			}
 		}
 
+		$guest = false;
+		if (self::checkStudent()) {
+			if (self::checkInstructor()) $guest = true;
+		}
+
 		$gravy = gravatar($course->instructor['email'], 86, $course->instructor['name']);
 
 		$this->template->title($course->title)
@@ -63,6 +68,7 @@ class CourseController extends \PublicController
 						->set('course', $course)
 						->set('gravy', $gravy)
 						->set('lectures', $lectures)
+						->set('guest', $guest)
 						->breadcrumb('Course', rbUrl('course'))
 						->breadcrumb($course->title);
 	}
