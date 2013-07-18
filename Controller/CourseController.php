@@ -4,12 +4,12 @@ namespace Course\Controller;
 
 use Reborn\Connector\Sentry\Sentry;
 
-use Course\Model\Course as Course;
-use Course\Model\Lecture as Lecture;
-use Course\Model\Student as Student;
-use Course\Model\Instructor as Instructor;
-use Reborn\Util\Mailer as Mailer;
-use User\Model\UserMeta as UserMeta;
+use Course\Model\Course;
+use Course\Model\Lecture;
+use Course\Model\Student;
+use Course\Model\Instructor;
+use Reborn\Util\Mailer;
+use User\Model\UserMeta;
 
 class CourseController extends \PublicController
 {
@@ -264,12 +264,15 @@ class CourseController extends \PublicController
 	 **/
 	protected function checkStudent()
 	{
-		$user = \Sentry::getUser();
-		$student = Student::where('userid', '=', $user->id)->get();
-		if($student->isEmpty()) {
-			return true;
+		if (\Sentry::check() ) {
+			$user = \Sentry::getUser();
+			$student = Student::where('userid', '=', $user->id)->get();
+			if($student->isEmpty()) {
+				return true;
+			}
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	/**
@@ -279,13 +282,16 @@ class CourseController extends \PublicController
 	 **/
 	protected function checkInstructor()
 	{
-		$user = \Sentry::getUser();
-		$instructor = Instructor::where('userid', '=', $user->id)->get();
-		if($instructor->isEmpty()) {
-			return true;
-		} elseif ($user->hasAccess('admin')) {
+		if (\Sentry::check() ) {
+			$user = \Sentry::getUser();
+			$instructor = Instructor::where('userid', '=', $user->id)->get();
+			if($instructor->isEmpty()) {
+				return true;
+			} elseif ($user->hasAccess('admin')) {
+				return false;
+			}
 			return false;
 		}
-		return false;
+		return true;
 	}
 }

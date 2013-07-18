@@ -2,8 +2,8 @@
 
 namespace Course\Controller\Admin;
 use Reborn\Connector\Sentry\Sentry;
-use Course\Model\Student as Student;
-use User\Model\User as User;
+use Course\Model\Student;
+use User\Model\User;
 
 class StudentController extends \AdminController
 {

@@ -2,10 +2,10 @@
 
 namespace Course\Controller\Admin;
 use Reborn\Connector\Sentry\Sentry;
-use Course\Model\Course as Course;
-use Course\Model\Instructor as Instructor;
-use Course\Model\CourseCategory as CourseCategory;
-use Course\Model\Lecture as Lecture;
+use Course\Model\Course;
+use Course\Model\Instructor;
+use Course\Model\CourseCategory;
+use Course\Model\Lecture;
 
 class CourseController extends \AdminController
 {
