@@ -23,8 +23,8 @@
 	        </div>
 		</div> <!-- endof .course-header -->
 
-		<div class="course-desc" id="markdownLec">
-			{{ $lecture->body }}
+		<div class="course-desc">
+			{{ markdown($lecture->body) }}
 	    </div>
 	</div> <!-- /#course-container -->
 
@@ -69,13 +69,3 @@
 		</ul>
 	{{ endif }}
 </div> <!-- end of #otherCourses -->
-
-<script type="text/javascript">
-
- 	var text = document.getElementById('markdownLec');
-	//var converter = new Showdown.converter();
-	var converter = new Showdown.converter();
-	var html = converter.makeHtml(text.innerHTML);
-	document.getElementById("markdownLec").innerHTML = html;
-
-</script>

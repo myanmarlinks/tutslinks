@@ -16,7 +16,6 @@ class CourseController extends \PublicController
 	public function before() 
 	{
 		$this->template->header = 'Courses';
-		$this->template->script('showdown.js','course');
 		$this->template->breadcrumb('Home', rbUrl());
 	}
 
